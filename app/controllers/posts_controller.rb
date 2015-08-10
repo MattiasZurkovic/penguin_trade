@@ -13,6 +13,9 @@ class PostsController < ApplicationController
   def show
   end
 
+  def my_trades
+  end
+
   # GET /posts/new
   def new
     @post = current_user.posts.build

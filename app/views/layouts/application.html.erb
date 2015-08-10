@@ -10,20 +10,28 @@
 
   <div class="ui large menu">
     <% if user_signed_in? -%>
-    <a class="active item">Home</a>
-    <a class="item">Messages</a>
+    <a class="active item" href="/">Home</a>
+    <a class="item" href="/"><i class="list layout icon"></i>Browse</a>
+    <a class="item" href="/posts/new"><i class="add circle icon"></i>Add Trade</a>
+    <a class="item" href="/"><i class="random icon"></i>My Trades</a>
+    <a class="item" href="/"><i class="search icon"></i>Search</a>
     <% else -%>
-    <a class="active item">Home</a>
-    <a class="item">Sign in</a>
+    <a class="active item" href="/">Home</a>
+    <a class="item" href="/"><i class="list layout icon"></i>Browse</a>
+    <a class="item" href="/"><i class="random icon"></i>Trades</a>
+    <a class="item" href="/"><i class="search icon"></i>Search</a>
     <% end -%>
 
     <div class="right menu">
     <% if user_signed_in? -%>
-      <div class="ui dropdown item"><%= link_to current_user.email, edit_user_registration_path %> <i class="dropdown icon"></i>
+      <div class="ui simple dropdown item"><%= link_to current_user.email, edit_user_registration_path %> <i class="dropdown icon"></i>
         <div class="menu">
-          <a class="item">English</a>
-          <a class="item">Russian</a>
-          <a class="item">Spanish</a>
+          <a class="item" href="/posts/new"><i class="add circle icon"></i>Add Trade</a>
+          <a class="item"><i class="smile icon"></i>Donate</a>
+          <div class="ui divider"></div>
+          <a class="item"><i class="user icon"></i>My Profile</a>
+          <a class="item" href='/users/edit'><i class="settings icon"></i>Settings</a>
+          <a class="item"><i class="sign out icon"></i></i>Log Out</a>
         </div>
       </div>
       <div class="item">
@@ -39,21 +47,13 @@
       </div>
       <div class="item">
         <%= link_to new_user_session_path do %>
-        <div class="ui primary button">Log In</div>
+        <div class="ui green button">Log In</div>
         <% end %>
       </div>
       <% end -%>
 
     </div>
   </div>
-
-  <% if user_signed_in? %>
-    <li><%= link_to current_user.email, edit_user_registration_path %></li>
-    <li><%= link_to 'log out', destroy_user_session_path, :method => :delete %></li>
-  <% else %>
-    <li><%= link_to 'sign up', new_user_registration_path %></li>
-    <li><%= link_to 'log in', new_user_session_path %></li>
-  <% end %>
 
   <% if notice %>
     <div id="notice_wrapper">
