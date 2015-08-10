@@ -8,6 +8,53 @@
 </head>
 <body>
 
+  <div class="ui large menu">
+    <% if user_signed_in? -%>
+    <a class="active item">Home</a>
+    <a class="item">Messages</a>
+    <% else -%>
+    <a class="active item">Home</a>
+    <a class="item">Sign in</a>
+    <% end -%>
+
+    <div class="right menu">
+    <% if user_signed_in? -%>
+      <div class="ui dropdown item"><%= link_to current_user.email, edit_user_registration_path %> <i class="dropdown icon"></i>
+        <div class="menu">
+          <a class="item">English</a>
+          <a class="item">Russian</a>
+          <a class="item">Spanish</a>
+        </div>
+      </div>
+      <div class="item">
+          <%= link_to destroy_user_session_path, :method => :delete do %>
+          <i class="sign out icon large"></i>
+          <% end %>
+      </div>
+      <% else -%>
+      <div class="item">
+          <%= link_to new_user_registration_path do %>
+          <div class="ui primary button">Sign Up</div>
+          <% end %>
+      </div>
+      <div class="item">
+        <%= link_to new_user_session_path do %>
+        <div class="ui primary button">Log In</div>
+        <% end %>
+      </div>
+      <% end -%>
+
+    </div>
+  </div>
+
+  <% if user_signed_in? %>
+    <li><%= link_to current_user.email, edit_user_registration_path %></li>
+    <li><%= link_to 'log out', destroy_user_session_path, :method => :delete %></li>
+  <% else %>
+    <li><%= link_to 'sign up', new_user_registration_path %></li>
+    <li><%= link_to 'log in', new_user_session_path %></li>
+  <% end %>
+
   <% if notice %>
     <div id="notice_wrapper">
       <p class="notice"><%= notice %></p>
@@ -20,11 +67,13 @@
 </html>
 
 <script>
+
 $(document).ready(function(){
-setTimeout(function(){
-  $('#notice_wrapper').fadeOut("slow", function(){
-    $(this).remove();
-  })
-}, 2000);
+  setTimeout(function(){
+    $('#notice_wrapper').fadeOut("slow", function(){
+      $(this).remove();
+    })
+  }, 2000);
 });
+
 </script>

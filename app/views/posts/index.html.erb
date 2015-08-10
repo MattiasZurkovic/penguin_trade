@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<div class="ui container">
 
 <h1>Listing Posts</h1>
 
@@ -17,8 +17,12 @@
         <td><%= post.title %></td>
         <td><%= post.content %></td>
         <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+        <% if post.user == current_user %>
+          <td><%= link_to 'Edit', edit_post_path(post) %></td>
+          <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+
         <td><p>submitted <%= time_ago_in_words(post.created_at) %> by <%= post.user.email  %></p></td>
       </tr>
     <% end %>
@@ -27,4 +31,4 @@
 
 <br>
 
-<%= link_to 'New Post', new_post_path %>
+</div>
