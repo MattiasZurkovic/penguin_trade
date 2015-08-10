@@ -1,21 +1,35 @@
+<div class="jumbo">
+<!--  <img class="ui fluid image" src="https://wizardryfoundry.com/wp-content/uploads/2014/10/black_lotus.jpg">
+--></div>
+
 <div class="ui container">
-
-<img class="ui fluid image" src="https://wizardryfoundry.com/wp-content/uploads/2014/10/black_lotus.jpg">
-
   <!-- Show search query to user (what they searched for...) -->
   <div class="ui center aligned container">
   <% @posts.to_a %>
   <% if params[:search] %>
-  <div id="query_return">Results for "<b><%= params[:search] %></b>"</div>
+ <!-- <h1>Results for "<b><%= params[:search] %></b>"</h1> -->
+
+  <div class='ui justified container'>
+  <h1 class="ui header">
+    <i class="search icon"></i>
+    <div class="content">
+      Search Results For:
+      <div class="sub header">"<%= params[:search] %>"</div>
+    </div>
+  </h1>
+  <hr>
+  <br>
+  </div>
+
   <% end %>
   </div>
 
   <% @posts.each do |post| %>
-  <div class="ui raised padded text container segment">
+  <div class="ui green padded segment">
      <h2 class="ui header"><%= link_to post.title, post %></h2>
      <p><%= post.content %></p>
 
-     <a class="ui teal label">
+     <a class="ui orange label">
        <%= post.user.email  %>
        <div class="detail"><%= time_ago_in_words(post.created_at) %></div>
      </a>
@@ -27,7 +41,4 @@
      <% end %>
      </div>
   <% end %>
-
-<br>
-
 </div>
