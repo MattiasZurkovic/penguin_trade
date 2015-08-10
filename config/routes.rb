@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   devise_for :users
   resources :posts
 
+  match '/search', to: 'posts#search', via: :get
   root to: 'posts#index'
 end

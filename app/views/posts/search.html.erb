@@ -1,0 +1,46 @@
+
+
+<div class="ui center aligned container">
+
+<div class="ui massive icon input">
+  <input placeholder="Find trades..." type="text">
+  <i class="search icon"></i>
+</div>
+
+<div class="ui small input">
+<%= form_tag posts_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search], class: 'search_box', :placeholder => "Search trades..." %>
+    <%= submit_tag "O-", :name => nil, class: 'search_button'%>
+  </p>
+<% end %>
+</div>
+
+<!-- Show search query to user (what they searched for...) -->
+<div class="ui justified container">
+<% @posts.to_a %>
+<% if params[:search] %>
+<div id="query_return">Results for "<b><%= params[:search] %></b>"</div>
+<% end %>
+</div>
+
+<% @posts.each do |post| %>
+<div class="ui raised padded text container segment">
+   <h2 class="ui header"><%= link_to post.title, post %></h2>
+   <p><%= post.content %></p>
+
+   <a class="ui teal label">
+     <%= post.user.email  %>
+     <div class="detail"><%= time_ago_in_words(post.created_at) %></div>
+   </a>
+
+   <%= link_to 'Show', post %>
+   <% if post.user == current_user %>
+     <td><%= link_to 'Edit', edit_post_path(post) %></td>
+     <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+   <% end %>
+   </div>
+<% end %>
+
+
+</div>

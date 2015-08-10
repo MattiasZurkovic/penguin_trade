@@ -6,6 +6,10 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
+    @posts = Post.order("created_at DESC")
+    if params[:search]
+      @posts = Post.where('title LIKE ?', "%#{params[:search]}%")
+    end
   end
 
   # GET /posts/1
@@ -23,6 +27,15 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+  end
+
+  # GET /search
+  def search
+    @posts = Post.all
+    @posts = Post.order("created_at DESC")
+    if params[:search]
+      @posts = Post.where('title LIKE ?', "%#{params[:search]}%")
+    end
   end
 
   # POST /posts

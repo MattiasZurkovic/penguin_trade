@@ -1,7 +1,17 @@
 <div class="ui container">
 
-<div class="ui raised padded text container segment">
+<img class="ui fluid image" src="https://wizardryfoundry.com/wp-content/uploads/2014/10/black_lotus.jpg">
+
+  <!-- Show search query to user (what they searched for...) -->
+  <div class="ui center aligned container">
+  <% @posts.to_a %>
+  <% if params[:search] %>
+  <div id="query_return">Results for "<b><%= params[:search] %></b>"</div>
+  <% end %>
+  </div>
+
   <% @posts.each do |post| %>
+  <div class="ui raised padded text container segment">
      <h2 class="ui header"><%= link_to post.title, post %></h2>
      <p><%= post.content %></p>
 
@@ -15,8 +25,8 @@
        <td><%= link_to 'Edit', edit_post_path(post) %></td>
        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
      <% end %>
+     </div>
   <% end %>
-</div>
 
 <br>
 
